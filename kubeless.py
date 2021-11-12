@@ -42,7 +42,7 @@ logger = logging.getLogger("kubeless")
 
 loader = importlib.machinery.SourceFileLoader(
     'function',
-    '/kubeless/%s.py' % os.getenv('MOD_NAME'))
+    '%s' % os.getenv('MOD_NAME'))
 spec = importlib.util.spec_from_loader(loader.name, loader)
 mod = importlib.util.module_from_spec(spec)
 loader.exec_module(mod)
