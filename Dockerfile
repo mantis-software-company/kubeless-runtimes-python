@@ -19,6 +19,4 @@ RUN pip install tornado prometheus_client uvloop
 WORKDIR /
 ADD kubeless.py .
 
-USER 1000
-
 CMD ["python", "/kubeless.py"]
