@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Checkout repo
+        uses: actions/checkout@v2
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -39,7 +42,14 @@ jobs:
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}          
+          labels: ${{ steps.meta.outputs.labels }}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+      - 
+        name: Push Readme to Docker Hub
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: mantissoftware
+          password: ${{ secrets.DOCKERHUB_PASS }}
+          repository: mantissoftware/encryption-service
